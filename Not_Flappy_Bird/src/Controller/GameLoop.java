@@ -7,9 +7,8 @@ import java.util.TimerTask;
 public class GameLoop {
     Toolkit toolKit = Toolkit.getDefaultToolkit();
     Timer t = new Timer();
-    Controller controller = new Controller();
 
-    public void run() {
+    public void start(Controller controller) {
         t.scheduleAtFixedRate(
                 new TimerTask() {
                     @Override

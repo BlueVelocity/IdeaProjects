@@ -1,8 +1,8 @@
-import Controller.GameLoop;
+import Controller.Controller;
 
 public class NotFlappyBird {
     public static void main(String[] args) {
-        GameLoop game = new GameLoop();
+        Controller game = new Controller();
         game.run();
     }
 }

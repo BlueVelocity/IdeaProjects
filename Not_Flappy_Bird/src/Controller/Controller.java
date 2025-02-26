@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener {
     Model model = new Model();
     View view = new View("Not Flappy Bird");
+    GameLoop gameLoop = new GameLoop();
 
     public Controller() {
         model.createPlayer();
@@ -30,6 +31,10 @@ public class Controller implements KeyListener {
     public void execFrame() {
         this.playerFall();
         view.render();
+    }
+
+    public void run() {
+        this.gameLoop.start(this);
     }
 
     @Override
