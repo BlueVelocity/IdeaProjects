@@ -22,19 +22,25 @@ public class Controller implements KeyListener {
         view.updatePlayer(model.getPlayerData());
    }
 
+   private void playerFall() {
+        model.playerFall();
+        view.updatePlayer((model.getPlayerData()));
+   }
+
     public void execFrame() {
+        this.playerFall();
         view.render();
     }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-        System.out.println("Key Pressed");
-        this.playerJump();
     }
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-
+        if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
+            this.playerJump();
+        }
     }
 
     @Override

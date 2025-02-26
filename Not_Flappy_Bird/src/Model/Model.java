@@ -16,4 +16,7 @@ public class Model {
     public void playerJump() {
         player.jump();
     }
+    public void playerFall() {
+        player.fall();
+    }
 }
