@@ -1,9 +1,8 @@
-import view.Render;
+import Controller.GameLoop;
 
 public class NotFlappyBird {
     public static void main(String[] args) {
-        Render renderer = new Render();
-
-        renderer.run();
+        GameLoop game = new GameLoop();
+        game.run();
     }
 }
