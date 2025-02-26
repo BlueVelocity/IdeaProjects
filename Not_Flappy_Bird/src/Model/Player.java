@@ -4,7 +4,7 @@ public class Player {
     private int x = 100;
     private int y = 250;
     private int size = 30;
-    private int peak;
+    private int counter;
 
     public int[] playerData() {
         int[] data = {x, y, size};
@@ -20,15 +20,16 @@ public class Player {
     }
 
     public void jump() {
-        this.moveUp(50);
+        this.counter = 50;
     }
 
     public void fall() {
-        this.moveDown(2);
-    }
-
-    private void setPeak() {
-        this.peak = this.y + 50;
+        if (this.counter > 0) {
+            this.moveUp(2);
+            this.counter -= 2;
+        } else {
+            this.moveDown(2);
+        }
     }
 
 }
