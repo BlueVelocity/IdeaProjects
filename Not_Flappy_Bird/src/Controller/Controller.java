@@ -8,11 +8,10 @@ import java.awt.event.KeyListener;
 
 public class Controller implements KeyListener {
     Model model = new Model();
-    View view = new View("Not Flappy Bird");
+    View view = new View("Not Flappy Bird", 600);
     GameLoop gameLoop = new GameLoop();
 
     public Controller() {
-        model.createPlayer();
         view.updatePlayer(model.getPlayerData());
 
         this.view.addKeyListener(this);

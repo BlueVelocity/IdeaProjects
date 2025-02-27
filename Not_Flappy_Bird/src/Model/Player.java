@@ -21,9 +21,7 @@ public class Player {
     }
 
     private void moveDown(int pixels) {
-        if (this.y < 600 - this.size) {
-            this.y += pixels;
-        }
+        this.y += pixels;
     }
 
     public void jump() {

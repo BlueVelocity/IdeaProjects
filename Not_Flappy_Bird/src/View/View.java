@@ -7,11 +7,11 @@ public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
 
-    public View(String title) {
+    public View(String title, int gameSize) {
         super(title);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(600, 600);
+        this.setSize(gameSize, gameSize);
         this.getContentPane().setBackground(backgroundColor);
 
         this.setFocusable(true);

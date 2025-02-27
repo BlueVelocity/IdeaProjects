@@ -1,22 +1,17 @@
 package Model;
 
 public class Model {
-    private Player player;
-
-    public void createPlayer() {
-        if (player == null) {
-            player = new Player();
-        }
-    }
+    private Player player = new Player();
 
     public int[] getPlayerData() {
-        return player.playerData();
+        return this.player.playerData();
     }
 
     public void playerJump() {
-        player.jump();
+        this.player.jump();
     }
+
     public void playerFall() {
-        player.fall();
+        this.player.fall();
     }
 }
