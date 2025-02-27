@@ -5,9 +5,11 @@ public class Pipe {
     private int y = 0;
     private int pipeWidth = 75;
     private int pipeHeight = 600;
+    private int pipeSpeed;
 
-    public Pipe(int screenHeight) {
+    public Pipe(int screenHeight, int pipeSpeed) {
         this.pipeHeight = screenHeight;
+        this.pipeSpeed = pipeSpeed;
 //        this.botOfTopPipe = (int) (Math.random() * (screenHeight - openingSize - 50)) + 50;
     }
 
@@ -17,7 +19,7 @@ public class Pipe {
     }
 
     public void slideLeft() {
-        this.x -= 2;
+        this.x -= this.pipeSpeed;
     }
 
 }

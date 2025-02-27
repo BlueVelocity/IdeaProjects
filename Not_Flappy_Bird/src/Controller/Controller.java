@@ -20,25 +20,25 @@ public class Controller implements KeyListener {
         this.view.addKeyListener(this);
     }
 
-   private void playerJump() {
+    private void playerJump() {
         model.playerJump();
         view.updatePlayer(model.getPlayerData());
-   }
+    }
 
-   private void playerFall() {
+    private void playerFall() {
         model.playerFall();
         view.updatePlayer(model.getPlayerData());
-   }
+    }
 
-   private void createPipe() {
+    private void createPipe() {
         model.createPipe();
         view.loadPipes(model.getPipeData());
-   }
+    }
 
-   private void slidePipes() {
+    private void slidePipes() {
         model.slidePipes();
-       view.loadPipes(model.getPipeData());
-   }
+        view.loadPipes(model.getPipeData());
+    }
 
     public void execFrame() {
         this.playerFall();

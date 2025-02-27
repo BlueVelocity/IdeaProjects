@@ -6,4 +6,12 @@ public class GameSettings {
         return 600;
     }
 
+    public int getPipeRate() {
+        return 200;
+    }
+
+    public int getPipeSpeed() {
+        return 2;
+    }
+
 }

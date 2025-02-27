@@ -8,9 +8,11 @@ public class Model {
     private GameSettings gameSettings;
     private Player player = new Player();
     private ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+    private int newPipeDist;
 
     public Model(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
+        this.newPipeDist = gameSettings.getPipeRate();
     }
 
     public int[] getPlayerData() {
@@ -36,10 +38,17 @@ public class Model {
     }
 
     public void createPipe() {
-        this.pipes.add(new Pipe(gameSettings.getScreenSize()));
+        this.pipes.add(new Pipe(gameSettings.getScreenSize(), this.gameSettings.getPipeSpeed()));
     }
 
     public void slidePipes() {
+        this.newPipeDist -= this.gameSettings.getPipeSpeed();
+
+        if (this.newPipeDist <= 0) {
+            this.newPipeDist = this.gameSettings.getPipeRate();
+            this.createPipe();
+        }
+
         for (Pipe pipe : this.pipes) {
             pipe.slideLeft();
         }
