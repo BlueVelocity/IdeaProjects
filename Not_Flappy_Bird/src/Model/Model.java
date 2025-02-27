@@ -9,10 +9,12 @@ public class Model {
     private Player player = new Player();
     private ArrayList<Pipe> pipes = new ArrayList<Pipe>();
     private int newPipeDist;
+    private int destroyPipeDist;
 
     public Model(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
         this.newPipeDist = gameSettings.getPipeRate();
+        this.destroyPipeDist = gameSettings.getScreenWidth() + gameSettings.getPipeWidth();
     }
 
     public int[] getPlayerData() {
@@ -38,11 +40,22 @@ public class Model {
     }
 
     public void createPipe() {
-        this.pipes.add(new Pipe(gameSettings.getScreenSize(), this.gameSettings.getPipeSpeed()));
+        this.pipes.add(new Pipe(this.gameSettings.getPipeWidth(), this.gameSettings.getScreenWidth(), this.gameSettings.getPipeSpeed()));
+    }
+
+    private void destroyPipe() {
+        this.pipes.remove(0);
+        System.out.println(this.pipes.size());
     }
 
     public void slidePipes() {
         this.newPipeDist -= this.gameSettings.getPipeSpeed();
+        this.destroyPipeDist -= this.gameSettings.getPipeSpeed();
+
+        if (this.destroyPipeDist <= 0) {
+            this.destroyPipeDist = this.gameSettings.getPipeRate() + this.gameSettings.getPipeWidth();
+            this.destroyPipe();
+        }
 
         if (this.newPipeDist <= 0) {
             this.newPipeDist = this.gameSettings.getPipeRate();

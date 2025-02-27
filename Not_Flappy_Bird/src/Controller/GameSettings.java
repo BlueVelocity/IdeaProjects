@@ -2,7 +2,7 @@ package Controller;
 
 public class GameSettings {
 
-    public int getScreenSize() {
+    public int getScreenWidth() {
         return 600;
     }
 
@@ -12,6 +12,10 @@ public class GameSettings {
 
     public int getPipeSpeed() {
         return 2;
+    }
+
+    public int getPipeWidth() {
+        return 75;
     }
 
 }

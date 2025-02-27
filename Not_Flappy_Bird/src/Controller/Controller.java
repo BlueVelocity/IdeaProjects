@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener {
     GameSettings gameSettings = new GameSettings();
     Model model = new Model(gameSettings);
-    View view = new View("Not Flappy Bird", gameSettings.getScreenSize());
+    View view = new View("Not Flappy Bird", gameSettings.getScreenWidth());
     GameLoop gameLoop = new GameLoop();
 
     public Controller() {
