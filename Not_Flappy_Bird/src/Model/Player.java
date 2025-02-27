@@ -32,7 +32,7 @@ public class Player {
         if (this.counter > 0) {
             this.moveUp(velocity);
             this.counter -= this.velocity;
-        } else {
+        } else if (this.y < 600 - 60) {
             this.moveDown(this.velocity);
         }
     }

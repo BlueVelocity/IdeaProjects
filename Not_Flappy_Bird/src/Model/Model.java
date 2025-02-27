@@ -53,7 +53,7 @@ public class Model {
         this.destroyPipeDist -= this.gameSettings.getPipeSpeed();
 
         if (this.destroyPipeDist <= 0) {
-            this.destroyPipeDist = this.gameSettings.getPipeRate() + this.gameSettings.getPipeWidth();
+            this.destroyPipeDist = this.gameSettings.getPipeRate();
             this.destroyPipe();
         }
 
