@@ -2,25 +2,51 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
+    ArrayList<PipeSprite> pipeSprites;
+    private JPanel gamePanel;
 
     public View(String title, int gameSize) {
         super(title);
 
+        gamePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Draw background
+                g.setColor(backgroundColor);
+                g.fillRect(0, 0, getWidth(), getHeight());
+                
+                // Draw pipes
+                if (pipeSprites != null) {
+                    for (PipeSprite pipe : pipeSprites) {
+                        pipe.paint(g);
+                    }
+                }
+                
+                // Draw player
+                if (playerSprite != null) {
+                    playerSprite.paint(g);
+                }
+            }
+        };
+
+        gamePanel.setBackground(backgroundColor);
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(gameSize, gameSize);
-        this.getContentPane().setBackground(backgroundColor);
+        this.add(gamePanel);
 
         this.setFocusable(true);
         this.setVisible(true);
     }
 
     public void render() {
-        this.updatePlayer();
-        this.paintComponents(this.getGraphics());
+        this.gamePanel.repaint();
     }
 
     public void updatePlayer(int[] playerData) {
@@ -31,9 +57,13 @@ public class View extends JFrame {
         }
     }
 
-    private void updatePlayer() {
-        if (playerSprite != null) {
-            this.getContentPane().add(playerSprite);
+    public void loadPipes(int[][] pipeData) {
+        this.pipeSprites = new ArrayList<PipeSprite>();
+
+        for (int[] pipe : pipeData) {
+            PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3]);
+            this.pipeSprites.add(pipeSprite);
         }
     }
+
 }

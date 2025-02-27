@@ -7,12 +7,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Controller implements KeyListener {
-    Model model = new Model();
-    View view = new View("Not Flappy Bird", 600);
+    GameSettings gameSettings = new GameSettings();
+    Model model = new Model(gameSettings);
+    View view = new View("Not Flappy Bird", gameSettings.getScreenSize());
     GameLoop gameLoop = new GameLoop();
 
     public Controller() {
         view.updatePlayer(model.getPlayerData());
+        this.createPipe();
+        view.loadPipes(this.model.getPipeData());
 
         this.view.addKeyListener(this);
     }
@@ -24,11 +27,22 @@ public class Controller implements KeyListener {
 
    private void playerFall() {
         model.playerFall();
-        view.updatePlayer((model.getPlayerData()));
+        view.updatePlayer(model.getPlayerData());
+   }
+
+   private void createPipe() {
+        model.createPipe();
+        view.loadPipes(model.getPipeData());
+   }
+
+   private void slidePipes() {
+        model.slidePipes();
+       view.loadPipes(model.getPipeData());
    }
 
     public void execFrame() {
         this.playerFall();
+        this.slidePipes();
         view.render();
     }
 
