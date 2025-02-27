@@ -1,14 +1,15 @@
 package Model;
 
 public class Pipe {
-    private int x = 400;
+    private int x;
     private int y = 0;
     private int pipeWidth = 75;
-    private int pipeHeight = 600;
+    private int pipeHeight;
     private int pipeSpeed;
 
-    public Pipe(int screenHeight, int pipeSpeed) {
-        this.pipeHeight = screenHeight;
+    public Pipe(int screenWidth, int pipeSpeed) {
+        this.pipeHeight = screenWidth;
+        this.x = screenWidth;
         this.pipeSpeed = pipeSpeed;
 //        this.botOfTopPipe = (int) (Math.random() * (screenHeight - openingSize - 50)) + 50;
     }

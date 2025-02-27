@@ -25,7 +25,7 @@ public class Player {
     }
 
     public void jump() {
-        this.counter = 50;
+        this.counter = 75;
     }
 
     public void fall() {

@@ -7,7 +7,7 @@ public class GameSettings {
     }
 
     public int getPipeRate() {
-        return 200;
+        return 300;
     }
 
     public int getPipeSpeed() {
