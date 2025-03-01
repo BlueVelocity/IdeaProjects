@@ -14,7 +14,7 @@ public class Model {
     public Model(GameSettings settings) {
         this.settings = settings;
         this.newPipeDist = settings.getPipeRate();
-        this.destroyPipeDist = settings.getScreenWidth() + settings.getPipeWidth();
+        this.destroyPipeDist = settings.getScreenSize() + settings.getPipeWidth();
     }
 
     public int[] getPlayerData() {
@@ -40,7 +40,7 @@ public class Model {
     }
 
     public void createPipe() {
-        this.pipes.add(new Pipe(this.settings.getPipeWidth(), this.settings.getScreenWidth(), this.settings.getPipeSpeed(), this.settings.getPipeGap()));
+        this.pipes.add(new Pipe(this.settings.getPipeWidth(), this.settings.getScreenSize(), this.settings.getPipeSpeed(), this.settings.getPipeGap()));
     }
 
     private void destroyPipe() {
@@ -64,5 +64,20 @@ public class Model {
         for (Pipe pipe : this.pipes) {
             pipe.slideLeft();
         }
+    }
+
+    public boolean checkCollision() {
+        int[] playerCorners = this.player.getCornerCoordinates();
+
+        for (Pipe pipe : this.pipes) {
+            int[] pipeCorners = pipe.getCornerCoordinates();
+
+            if ((playerCorners[1] > pipeCorners[0] && playerCorners[0] < pipeCorners[1])
+            && (playerCorners[2] < pipeCorners[2] || playerCorners[3] > pipeCorners[3])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

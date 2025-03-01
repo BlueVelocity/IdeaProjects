@@ -2,7 +2,7 @@ package Controller;
 
 public class GameSettings {
 
-    public int getScreenWidth() {
+    public int getScreenSize() {
         return 600;
     }
 

@@ -9,8 +9,9 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener {
     GameSettings gameSettings = new GameSettings();
     Model model = new Model(gameSettings);
-    View view = new View("Not Flappy Bird", gameSettings.getScreenWidth());
+    View view = new View("Not Flappy Bird", gameSettings.getScreenSize());
     GameLoop gameLoop = new GameLoop();
+    boolean lost = false;
 
     public Controller() {
         view.updatePlayer(model.getPlayerData());
@@ -34,15 +35,23 @@ public class Controller implements KeyListener {
         view.loadPipes(model.getPipeData());
     }
 
+    private boolean checkCollision() {
+        return model.checkCollision();
+    }
+
     private void slidePipes() {
         model.slidePipes();
         view.loadPipes(model.getPipeData());
     }
 
     public void execFrame() {
-        this.playerFall();
-        this.slidePipes();
-        view.render();
+        if (this.checkCollision()) {
+            this.gameOver();
+        } else {
+            this.playerFall();
+            this.slidePipes();
+            view.render();
+        }
     }
 
     public void start() {
@@ -53,6 +62,17 @@ public class Controller implements KeyListener {
         this.gameLoop.stop();
     }
 
+    private void gameOver() {
+        this.lost = true;
+        this.gameLoop.stop();
+    }
+
+    private void resetGame() {
+        this.model = new Model(this.gameSettings);
+        this.createPipe();
+        this.start();
+    }
+
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         if (keyEvent.getKeyChar() == 'p') {
@@ -61,6 +81,8 @@ public class Controller implements KeyListener {
             } else {
                 this.pause();
             }
+        } else if (keyEvent.getKeyChar() == 'r') {
+            this.resetGame();
         }
     }
 

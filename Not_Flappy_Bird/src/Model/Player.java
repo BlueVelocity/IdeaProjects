@@ -37,4 +37,7 @@ public class Player {
         }
     }
 
+    public int[] getCornerCoordinates() {
+        return new int[]{this.x, this.x + this.size, this.y, this.y + this.size};
+    }
 }
