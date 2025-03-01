@@ -5,10 +5,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameLoop {
-    Toolkit toolKit = Toolkit.getDefaultToolkit();
-    Timer t = new Timer();
+    private Toolkit toolKit = Toolkit.getDefaultToolkit();
+    private Timer t;
+    private boolean isStopped = true;
 
     public void start(Controller controller) {
+        this.isStopped = false;
+
+        t = new Timer();
         t.scheduleAtFixedRate(
                 new TimerTask() {
                     @Override
@@ -21,4 +25,14 @@ public class GameLoop {
                 (int)(1000/60)
         );
     };
+
+    public void stop() {
+        t.cancel();
+
+        this.isStopped = true;
+    }
+
+    public boolean checkIfPaused() {
+        return this.isStopped;
+    }
 }

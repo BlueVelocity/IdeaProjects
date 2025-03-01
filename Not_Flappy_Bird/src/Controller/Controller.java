@@ -15,7 +15,6 @@ public class Controller implements KeyListener {
     public Controller() {
         view.updatePlayer(model.getPlayerData());
         this.createPipe();
-        view.loadPipes(this.model.getPipeData());
 
         this.view.addKeyListener(this);
     }
@@ -46,12 +45,23 @@ public class Controller implements KeyListener {
         view.render();
     }
 
-    public void run() {
+    public void start() {
         this.gameLoop.start(this);
+    }
+
+    private void pause() {
+        this.gameLoop.stop();
     }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
+        if (keyEvent.getKeyChar() == 'p') {
+            if (this.gameLoop.checkIfPaused()) {
+                this.start();
+            } else {
+                this.pause();
+            }
+        }
     }
 
     @Override
