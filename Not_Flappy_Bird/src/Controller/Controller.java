@@ -11,28 +11,27 @@ public class Controller implements KeyListener {
     Model model = new Model(gameSettings);
     View view = new View("Not Flappy Bird", gameSettings.getScreenSize());
     GameLoop gameLoop = new GameLoop();
-    boolean lost = false;
 
     public Controller() {
-        view.updatePlayer(model.getPlayerData());
+        this.view.updatePlayer(model.getPlayerData());
         this.createPipe();
 
         this.view.addKeyListener(this);
     }
 
     private void playerJump() {
-        model.playerJump();
-        view.updatePlayer(model.getPlayerData());
+        this.model.playerJump();
+        this.view.updatePlayer(model.getPlayerData());
     }
 
     private void playerFall() {
-        model.playerFall();
-        view.updatePlayer(model.getPlayerData());
+        this.model.playerFall();
+        this.view.updatePlayer(model.getPlayerData());
     }
 
     private void createPipe() {
-        model.createPipe();
-        view.loadPipes(model.getPipeData());
+        this.model.createPipe();
+        this.view.loadPipes(model.getPipeData());
     }
 
     private boolean checkCollision() {
@@ -40,8 +39,8 @@ public class Controller implements KeyListener {
     }
 
     private void slidePipes() {
-        model.slidePipes();
-        view.loadPipes(model.getPipeData());
+        this.model.slidePipes();
+        this.view.loadPipes(model.getPipeData());
     }
 
     public void execFrame() {
@@ -50,7 +49,7 @@ public class Controller implements KeyListener {
         } else {
             this.playerFall();
             this.slidePipes();
-            view.render();
+            this.view.render();
         }
     }
 
@@ -58,17 +57,19 @@ public class Controller implements KeyListener {
         this.gameLoop.start(this);
     }
 
-    private void pause() {
+    private void stop() {
         this.gameLoop.stop();
     }
 
     private void gameOver() {
-        this.lost = true;
-        this.gameLoop.stop();
+        this.view.gameOver();
+        this.view.render();
+        this.stop();
     }
 
     private void resetGame() {
         this.model = new Model(this.gameSettings);
+        this.view.restart();
         this.createPipe();
         this.start();
     }
@@ -76,10 +77,10 @@ public class Controller implements KeyListener {
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         if (keyEvent.getKeyChar() == 'p') {
-            if (this.gameLoop.checkIfPaused()) {
+            if (this.gameLoop.checkIfStopped()) {
                 this.start();
             } else {
-                this.pause();
+                this.stop();
             }
         } else if (keyEvent.getKeyChar() == 'r') {
             this.resetGame();

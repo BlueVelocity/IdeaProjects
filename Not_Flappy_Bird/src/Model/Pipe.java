@@ -20,8 +20,7 @@ public class Pipe {
     }
 
     public int[] pipeData() {
-        int[] data = {this.x, this.bottomTopPipe, this.topBottomPipe, this.pipeWidth, this.pipeHeight};
-        return data;
+        return new int[]{this.x, this.bottomTopPipe, this.topBottomPipe, this.pipeWidth, this.pipeHeight};
     }
 
     public int[] getCornerCoordinates() {

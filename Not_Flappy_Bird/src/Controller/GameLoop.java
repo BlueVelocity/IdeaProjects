@@ -32,7 +32,7 @@ public class GameLoop {
         this.isStopped = true;
     }
 
-    public boolean checkIfPaused() {
+    public boolean checkIfStopped() {
         return this.isStopped;
     }
 }

@@ -8,38 +8,46 @@ public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
     ArrayList<PipeSprite> pipeSprites;
+    GameOverScreen gameOverScreen;
+    boolean gameOver = false;
     private final JPanel gamePanel;
 
-    public View(String title, int gameSize) {
+    public View(String title, int screenSize) {
         super(title);
 
         gamePanel = new JPanel() {
 
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                // Draw background
+
                 g.setColor(backgroundColor);
                 g.fillRect(0, 0, getWidth(), getHeight());
                 
-                // Draw pipes
                 if (pipeSprites != null) {
                     for (PipeSprite pipe : pipeSprites) {
                         pipe.paint(g);
                     }
                 }
-                
-                // Draw player
+
                 if (playerSprite != null) {
                     playerSprite.paint(g);
                 }
+
+                if (gameOver) {
+                    gameOverScreen.paint(g);
+                }
+
             }
         };
 
         gamePanel.setBackground(backgroundColor);
 
+        this.gameOverScreen = new GameOverScreen(screenSize);
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(gameSize, gameSize);
+        this.setSize(screenSize, screenSize);
         this.add(gamePanel);
 
         this.setFocusable(true);
@@ -54,9 +62,9 @@ public class View extends JFrame {
 
     public void updatePlayer(int[] playerData) {
         if (playerSprite == null) {
-            playerSprite = new PlayerSprite(playerData[0], playerData[1], playerData[2]);
+            this.playerSprite = new PlayerSprite(playerData[0], playerData[1], playerData[2]);
         } else {
-            playerSprite.updateYCoord(playerData[1]);
+            this.playerSprite.updateYCoord(playerData[1]);
         }
     }
 
@@ -67,6 +75,14 @@ public class View extends JFrame {
             PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3], pipe[4]);
             this.pipeSprites.add(pipeSprite);
         }
+    }
+
+    public void gameOver() {
+        this.gameOver = true;
+    }
+
+    public void restart() {
+        this.gameOver = false;
     }
 
 }
