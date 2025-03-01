@@ -68,6 +68,7 @@ public class Controller implements KeyListener {
     }
 
     private void resetGame() {
+        this.stop();
         this.model = new Model(this.gameSettings);
         this.view.restart();
         this.createPipe();

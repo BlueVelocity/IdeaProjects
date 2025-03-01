@@ -1,10 +1,9 @@
 package Model;
 
 public class Player {
-    private int x = 100;
+    private final int x = 100;
     private int y = 250;
-    private int size = 30;
-    private int velocity = 4;
+    private final int size = 30;
     private int counter;
 
     public int[] playerData() {
@@ -25,15 +24,16 @@ public class Player {
     }
 
     public void jump() {
-        this.counter = 75;
+        this.counter = this.size * 3;
     }
 
     public void fall() {
+        int velocity = 4;
         if (this.counter > 0) {
             this.moveUp(velocity);
-            this.counter -= this.velocity;
+            this.counter -= velocity;
         } else if (this.y < 600 - 60) {
-            this.moveDown(this.velocity);
+            this.moveDown(velocity);
         }
     }
 

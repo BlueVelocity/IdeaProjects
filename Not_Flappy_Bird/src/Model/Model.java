@@ -5,9 +5,9 @@ import Controller.GameSettings;
 import java.util.ArrayList;
 
 public class Model {
-    private GameSettings settings;
-    private Player player = new Player();
-    private ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+    private final GameSettings settings;
+    private final Player player = new Player();
+    private final ArrayList<Pipe> pipes = new ArrayList<Pipe>();
     private int newPipeDist;
     private int destroyPipeDist;
 
