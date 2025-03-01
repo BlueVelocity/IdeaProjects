@@ -9,7 +9,7 @@ public class Pipe {
     private int pipeSpeed;
 
     public Pipe(int pipeWidth, int screenWidth, int pipeSpeed, int pipeGap) {
-        this.bottomTopPipe = (int) (Math.random() * (screenWidth - pipeGap - 50));
+        this.bottomTopPipe = (int) (Math.random() * (screenWidth - pipeGap - 75) + 75);
         this.topBottomPipe = this.bottomTopPipe + pipeGap;
 
         this.pipeHeight = screenWidth;

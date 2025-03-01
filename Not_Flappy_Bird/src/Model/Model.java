@@ -69,6 +69,8 @@ public class Model {
     public boolean checkCollision() {
         int[] playerCorners = this.player.getCornerCoordinates();
 
+        if (playerCorners[2] >= settings.getScreenSize() - 60) return true;
+
         for (Pipe pipe : this.pipes) {
             int[] pipeCorners = pipe.getCornerCoordinates();
 
