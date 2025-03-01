@@ -18,4 +18,8 @@ public class GameSettings {
         return 75;
     }
 
+    public int getPipeGap() {
+        return 200;
+    }
+
 }

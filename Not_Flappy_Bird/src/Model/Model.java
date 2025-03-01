@@ -5,16 +5,16 @@ import Controller.GameSettings;
 import java.util.ArrayList;
 
 public class Model {
-    private GameSettings gameSettings;
+    private GameSettings settings;
     private Player player = new Player();
     private ArrayList<Pipe> pipes = new ArrayList<Pipe>();
     private int newPipeDist;
     private int destroyPipeDist;
 
-    public Model(GameSettings gameSettings) {
-        this.gameSettings = gameSettings;
-        this.newPipeDist = gameSettings.getPipeRate();
-        this.destroyPipeDist = gameSettings.getScreenWidth() + gameSettings.getPipeWidth();
+    public Model(GameSettings settings) {
+        this.settings = settings;
+        this.newPipeDist = settings.getPipeRate();
+        this.destroyPipeDist = settings.getScreenWidth() + settings.getPipeWidth();
     }
 
     public int[] getPlayerData() {
@@ -30,7 +30,7 @@ public class Model {
     }
 
     public int[][] getPipeData() {
-        int[][] pipeData = new int[pipes.size()][4];
+        int[][] pipeData = new int[pipes.size()][5];
 
         for (int i = 0; i < pipes.size(); i++) {
             pipeData[i] = pipes.get(i).pipeData();
@@ -40,25 +40,24 @@ public class Model {
     }
 
     public void createPipe() {
-        this.pipes.add(new Pipe(this.gameSettings.getPipeWidth(), this.gameSettings.getScreenWidth(), this.gameSettings.getPipeSpeed()));
+        this.pipes.add(new Pipe(this.settings.getPipeWidth(), this.settings.getScreenWidth(), this.settings.getPipeSpeed(), this.settings.getPipeGap()));
     }
 
     private void destroyPipe() {
         this.pipes.remove(0);
-        System.out.println(this.pipes.size());
     }
 
     public void slidePipes() {
-        this.newPipeDist -= this.gameSettings.getPipeSpeed();
-        this.destroyPipeDist -= this.gameSettings.getPipeSpeed();
+        this.newPipeDist -= this.settings.getPipeSpeed();
+        this.destroyPipeDist -= this.settings.getPipeSpeed();
 
         if (this.destroyPipeDist <= 0) {
-            this.destroyPipeDist = this.gameSettings.getPipeRate();
+            this.destroyPipeDist = this.settings.getPipeRate();
             this.destroyPipe();
         }
 
         if (this.newPipeDist <= 0) {
-            this.newPipeDist = this.gameSettings.getPipeRate();
+            this.newPipeDist = this.settings.getPipeRate();
             this.createPipe();
         }
 

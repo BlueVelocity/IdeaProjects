@@ -8,12 +8,13 @@ public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
     ArrayList<PipeSprite> pipeSprites;
-    private JPanel gamePanel;
+    private final JPanel gamePanel;
 
     public View(String title, int gameSize) {
         super(title);
 
         gamePanel = new JPanel() {
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -43,6 +44,8 @@ public class View extends JFrame {
 
         this.setFocusable(true);
         this.setVisible(true);
+        this.setResizable(false);
+
     }
 
     public void render() {
@@ -61,7 +64,7 @@ public class View extends JFrame {
         this.pipeSprites = new ArrayList<PipeSprite>();
 
         for (int[] pipe : pipeData) {
-            PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3]);
+            PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3], pipe[4]);
             this.pipeSprites.add(pipeSprite);
         }
     }

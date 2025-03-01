@@ -4,20 +4,36 @@ import java.awt.*;
 
 public class PipeSprite {
     private int x;
-    private int y;
     private int width;
-    private int height;
+    private int totalHeight;
+    private int topPipeBottomY;
+    private int topBottomPipe;
 
-    public PipeSprite(int x, int y, int width, int height) {
+    public PipeSprite(int x, int topPipeBottomY, int topBottomPipe, int width, int height) {
         this.x = x;
-        this.y = y;
         this.width = width;
-        this.height = height;
+        this.totalHeight = height;
+        this.topPipeBottomY = topPipeBottomY;
+        this.topBottomPipe = topBottomPipe;
     }
 
     public void paint(Graphics g) {
         g.setColor(Color.GREEN);
-        g.fillRect(this.x, this.y, this.width, this.height);
+
+        int[] pTop = this.getTopPipeData();
+        g.fillRect(pTop[0],pTop[1],pTop[2],pTop[3]);
+
+        int[] pBot = this.getBottomPipeData();
+        g.fillRect(pBot[0],pBot[1],pBot[2],pBot[3]);
+
+    }
+
+    private int[] getTopPipeData() {
+        return new int[]{this.x, 0, this.width, this.topPipeBottomY};
+    }
+
+    private int[] getBottomPipeData() {
+        return new int[]{this.x, this.topBottomPipe, this.width, this.totalHeight};
     }
 
 }
