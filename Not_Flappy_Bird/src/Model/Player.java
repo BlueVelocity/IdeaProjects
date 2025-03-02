@@ -4,37 +4,28 @@ public class Player {
     private final int x = 100;
     private int y = 250;
     private final int size = 30;
-    private int counter;
+    int velocity = 0;
 
     public int[] getPlayerData() {
         int[] data = {x, y, size};
         return data;
     }
 
-    private void moveUp(int pixels) {
-        if (this.y > 0) {
-            this.y -= pixels;
-        } else {
-            this.counter = 0;
-        }
-    }
-
-    private void moveDown(int pixels) {
+    private void move(int pixels) {
         this.y += pixels;
     }
 
     public void jump() {
-        this.counter = this.size * 3;
+        this.velocity = -16;
     }
 
     public void fall() {
-        int velocity = 4;
-        if (this.counter > 0) {
-            this.moveUp(velocity);
-            this.counter -= velocity;
-        } else if (this.y < 600 - 60) {
-            this.moveDown(velocity);
+    if (this.y < 1) {
+        this.velocity = 1;
+    } else if (this.velocity < 6) {
+            this.velocity += 1;
         }
+        this.move(this.velocity);
     }
 
     public int[] getCornerCoordinates() {
