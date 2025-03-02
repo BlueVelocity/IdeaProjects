@@ -36,7 +36,7 @@ public class Instructions extends JComponent {
         g.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
         for (int i = 1; i < this.instructions.length; i++) {
-            drawBottomRightString(instructions[i], screenSize, g, 12, 48 + yOffset);
+            drawBottomRightString(instructions[i], screenSize, g, 24, 48 + yOffset);
             yOffset += fontSize + 10;
         }
 
