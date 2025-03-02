@@ -49,7 +49,7 @@ public class View extends JFrame {
         gamePanel.setBackground(backgroundColor);
 
         this.scoreBoard = new ScoreBoard(screenSize);
-        instructions = new Instructions(screenSize, instructionList);
+        this.instructions = new Instructions(screenSize, instructionList);
         this.gameOverScreen = new GameOverScreen(screenSize);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -92,7 +92,12 @@ public class View extends JFrame {
     }
 
     public void restart() {
+        this.setScore(0);
         this.gameOver = false;
+    }
+
+    public void displayPressToStart(boolean bool) {
+        this.instructions.displayPressToStart(bool);
     }
 
 }

@@ -11,6 +11,7 @@ public class Controller implements KeyListener {
     Model model = new Model(gameSettings);
     View view = new View("Not Flappy Bird", gameSettings.getScreenSize(), gameSettings.getInstructions());
     GameLoop gameLoop = new GameLoop();
+    private boolean isRunning = false;
 
     public Controller() {
         this.view.updatePlayer(model.getPlayerData());
@@ -76,9 +77,12 @@ public class Controller implements KeyListener {
     private void resetGame() {
         this.stop();
         this.model = new Model(this.gameSettings);
-        this.view.restart();
+        this.view.updatePlayer(model.getPlayerData());
         this.createPipe();
-        this.start();
+        this.view.displayPressToStart(true);
+        this.view.restart();
+        this.view.render();
+        this.isRunning = false;
     }
 
     @Override
@@ -97,7 +101,14 @@ public class Controller implements KeyListener {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
-            this.playerJump();
+            if (this.isRunning == false) {
+                this.view.displayPressToStart(false);
+                this.playerJump();
+                this.start();
+                this.isRunning = true;
+            } else {
+                this.playerJump();
+            }
         }
     }
 

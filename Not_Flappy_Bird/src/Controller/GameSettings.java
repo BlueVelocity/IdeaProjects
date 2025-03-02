@@ -24,9 +24,10 @@ public class GameSettings {
 
     public String[] getInstructions() {
         return new String[]{
+                "Press SPACE to start!",
                 "R: Restart",
                 "P: Pause",
-                "Space: Jump",
+                "SPACE: Jump",
             };
     }
 
