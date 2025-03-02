@@ -22,4 +22,12 @@ public class GameSettings {
         return 200;
     }
 
+    public String[] getInstructions() {
+        return new String[]{
+                "R: Restart",
+                "P: Pause",
+                "Space: Jump",
+            };
+    }
+
 }

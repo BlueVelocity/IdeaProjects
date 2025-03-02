@@ -9,15 +9,15 @@ public class View extends JFrame {
     PlayerSprite playerSprite;
     ArrayList<PipeSprite> pipeSprites;
     ScoreBoard scoreBoard;
+    Instructions instructions;
     GameOverScreen gameOverScreen;
     boolean gameOver = false;
     private final JPanel gamePanel;
 
-    public View(String title, int screenSize) {
+    public View(String title, int screenSize, String[] instructionList) {
         super(title);
 
         gamePanel = new JPanel() {
-
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -37,6 +37,7 @@ public class View extends JFrame {
                 }
 
                 scoreBoard.paint(g);
+                instructions.paint(g);
 
                 if (gameOver) {
                     gameOverScreen.paint(g);
@@ -48,6 +49,7 @@ public class View extends JFrame {
         gamePanel.setBackground(backgroundColor);
 
         this.scoreBoard = new ScoreBoard(screenSize);
+        instructions = new Instructions(screenSize, instructionList);
         this.gameOverScreen = new GameOverScreen(screenSize);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
