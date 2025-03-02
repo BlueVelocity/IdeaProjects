@@ -8,6 +8,7 @@ public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
     ArrayList<PipeSprite> pipeSprites;
+    ScoreBoard scoreBoard;
     GameOverScreen gameOverScreen;
     boolean gameOver = false;
     private final JPanel gamePanel;
@@ -35,6 +36,8 @@ public class View extends JFrame {
                     playerSprite.paint(g);
                 }
 
+                scoreBoard.paint(g);
+
                 if (gameOver) {
                     gameOverScreen.paint(g);
                 }
@@ -44,6 +47,7 @@ public class View extends JFrame {
 
         gamePanel.setBackground(backgroundColor);
 
+        this.scoreBoard = new ScoreBoard(screenSize);
         this.gameOverScreen = new GameOverScreen(screenSize);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -75,6 +79,10 @@ public class View extends JFrame {
             PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3], pipe[4]);
             this.pipeSprites.add(pipeSprite);
         }
+    }
+
+    public void setScore(int score) {
+        this.scoreBoard.setScore(score);
     }
 
     public void gameOver() {

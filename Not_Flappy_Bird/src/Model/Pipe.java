@@ -9,17 +9,16 @@ public class Pipe {
     private int pipeSpeed;
 
     public Pipe(int pipeWidth, int screenWidth, int pipeSpeed, int pipeGap) {
-        this.bottomTopPipe = (int) (Math.random() * (screenWidth - pipeGap - 75) + 75);
+        this.bottomTopPipe = (int) (Math.random() * (screenWidth - pipeGap));
         this.topBottomPipe = this.bottomTopPipe + pipeGap;
 
         this.pipeHeight = screenWidth;
         this.x = screenWidth;
         this.pipeSpeed = pipeSpeed;
         this.pipeWidth = pipeWidth;
-//        this.botOfTopPipe = (int) (Math.random() * (screenHeight - openingSize - 50)) + 50;
     }
 
-    public int[] pipeData() {
+    public int[] getPipeData() {
         return new int[]{this.x, this.bottomTopPipe, this.topBottomPipe, this.pipeWidth, this.pipeHeight};
     }
 

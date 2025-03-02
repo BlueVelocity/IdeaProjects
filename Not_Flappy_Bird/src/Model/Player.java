@@ -6,7 +6,7 @@ public class Player {
     private final int size = 30;
     private int counter;
 
-    public int[] playerData() {
+    public int[] getPlayerData() {
         int[] data = {x, y, size};
         return data;
     }

@@ -10,6 +10,7 @@ public class Model {
     private final ArrayList<Pipe> pipes = new ArrayList<Pipe>();
     private int newPipeDist;
     private int destroyPipeDist;
+    private int score = 0;
 
     public Model(GameSettings settings) {
         this.settings = settings;
@@ -17,8 +18,12 @@ public class Model {
         this.destroyPipeDist = settings.getScreenSize() + settings.getPipeWidth();
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
     public int[] getPlayerData() {
-        return this.player.playerData();
+        return this.player.getPlayerData();
     }
 
     public void playerJump() {
@@ -33,7 +38,7 @@ public class Model {
         int[][] pipeData = new int[pipes.size()][5];
 
         for (int i = 0; i < pipes.size(); i++) {
-            pipeData[i] = pipes.get(i).pipeData();
+            pipeData[i] = pipes.get(i).getPipeData();
         }
 
         return pipeData;
@@ -82,4 +87,21 @@ public class Model {
 
         return false;
     }
+
+    private int roundToNextEven(int num) {
+        return num%2 == 0 ? num : num - 1;
+    }
+
+    //Checking against a round even number means that pipes velocity must be an even number (see GameSettings)
+    public boolean checkIfScored() {
+        for (Pipe pipe : this.pipes) {
+            int[] pipeData = pipe.getPipeData();
+            if (this.player.getPlayerData()[0] == this.roundToNextEven(pipeData[0] + pipeData[3])) {
+                this.score++;
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

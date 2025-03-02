@@ -29,6 +29,11 @@ public class Controller implements KeyListener {
         this.view.updatePlayer(model.getPlayerData());
     }
 
+    private void checkPlayerScore() {
+        this.model.checkIfScored();
+        this.view.setScore(this.model.getScore());
+    }
+
     private void createPipe() {
         this.model.createPipe();
         this.view.loadPipes(model.getPipeData());
@@ -48,6 +53,7 @@ public class Controller implements KeyListener {
             this.gameOver();
         } else {
             this.playerFall();
+            this.checkPlayerScore();
             this.slidePipes();
             this.view.render();
         }
