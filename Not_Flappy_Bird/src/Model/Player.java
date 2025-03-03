@@ -20,12 +20,14 @@ public class Player {
     }
 
     public void fall() {
+
     if (this.y < 1) {
         this.velocity = 1;
-    } else if (this.velocity < 6) {
-            this.velocity += 1;
-        }
-        this.move(this.velocity);
+    } else if (this.velocity < 8) {
+        this.velocity += 1;
+    }
+
+    this.move(this.velocity);
     }
 
     public int[] getCornerCoordinates() {
