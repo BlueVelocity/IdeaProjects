@@ -94,7 +94,7 @@ public class View extends JFrame {
         this.cloudSprites = new ArrayList<CloudSprite>();
 
         for (int[] cloud : cloudData) {
-            CloudSprite cloudSprite = new CloudSprite(cloud[0], cloud[1]);
+            CloudSprite cloudSprite = new CloudSprite(cloud[0], cloud[1], cloud[2]);
             this.cloudSprites.add(cloudSprite);
         }
     }

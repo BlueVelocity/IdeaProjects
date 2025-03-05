@@ -83,7 +83,7 @@ public class Model {
     }
 
     public void createCloud() {
-        this.clouds.add(new Cloud(50, this.settings.getCloudSpeed(), this.settings.getScreenSize()));
+        this.clouds.add(new Cloud(60, this.settings.getCloudSpeed(), this.settings.getScreenSize(), this.settings.getScreenSize()));
     }
 
     private void destroyCloud() {
@@ -95,7 +95,7 @@ public class Model {
             cloud.slideLeft();
         }
 
-        if (!this.clouds.isEmpty() && this.clouds.get(0).getCloudData()[0] < -150) {
+        if (this.clouds.get(0).getCloudData()[0] < -150) {
             this.createCloud();
             this.destroyCloud();
         }

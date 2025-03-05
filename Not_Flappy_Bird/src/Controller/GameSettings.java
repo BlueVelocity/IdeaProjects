@@ -22,12 +22,8 @@ public class GameSettings {
         return 200;
     }
 
-    public int getCloudRate() {
-        return 350;
-    }
-
     public int getCloudSpeed() {
-        return 3;
+        return 1;
     }
 
     public String[] getInstructions() {
