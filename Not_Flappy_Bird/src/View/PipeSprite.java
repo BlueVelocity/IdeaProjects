@@ -1,8 +1,9 @@
 package View;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class PipeSprite {
+public class PipeSprite extends JComponent {
     private int x;
     private int width;
     private int totalHeight;

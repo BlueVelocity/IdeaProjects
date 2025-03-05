@@ -15,6 +15,7 @@ public class Controller implements KeyListener {
 
     public Controller() {
         this.view.updatePlayer(model.getPlayerData());
+        this.createCloud();
         this.createPipe();
 
         this.view.addKeyListener(this);
@@ -49,12 +50,24 @@ public class Controller implements KeyListener {
         this.view.loadPipes(model.getPipeData());
     }
 
+    private void createCloud() {
+        this.model.createCloud();
+        this.view.loadClouds(model.getCloudData());
+    }
+
+
+    private void slideClouds() {
+        this.model.slideClouds();
+        this.view.loadClouds(model.getCloudData());
+    }
+
     public void execFrame() {
         if (this.checkCollision()) {
             this.gameOver();
         } else {
             this.playerFall();
             this.checkPlayerScore();
+            this.slideClouds();
             this.slidePipes();
             this.view.render();
         }
@@ -78,6 +91,7 @@ public class Controller implements KeyListener {
         this.stop();
         this.model = new Model(this.gameSettings);
         this.view.updatePlayer(model.getPlayerData());
+        this.createCloud();
         this.createPipe();
         this.view.displayPressToStart(true);
         this.view.restart();

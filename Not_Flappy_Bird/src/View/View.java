@@ -8,6 +8,7 @@ public class View extends JFrame {
     Color backgroundColor = new Color(100, 180, 250);
     PlayerSprite playerSprite;
     ArrayList<PipeSprite> pipeSprites;
+    ArrayList<CloudSprite> cloudSprites;
     ScoreBoard scoreBoard;
     Instructions instructions;
     GameOverScreen gameOverScreen;
@@ -25,7 +26,13 @@ public class View extends JFrame {
 
                 g.setColor(backgroundColor);
                 g.fillRect(0, 0, getWidth(), getHeight());
-                
+
+                if (cloudSprites != null) {
+                    for (CloudSprite cloud : cloudSprites) {
+                        cloud.paint(g);
+                    }
+                }
+
                 if (pipeSprites != null) {
                     for (PipeSprite pipe : pipeSprites) {
                         pipe.paint(g);
@@ -80,6 +87,15 @@ public class View extends JFrame {
         for (int[] pipe : pipeData) {
             PipeSprite pipeSprite = new PipeSprite(pipe[0], pipe[1], pipe[2], pipe[3], pipe[4]);
             this.pipeSprites.add(pipeSprite);
+        }
+    }
+
+    public void loadClouds(int[][] cloudData) {
+        this.cloudSprites = new ArrayList<CloudSprite>();
+
+        for (int[] cloud : cloudData) {
+            CloudSprite cloudSprite = new CloudSprite(cloud[0], cloud[1]);
+            this.cloudSprites.add(cloudSprite);
         }
     }
 

@@ -22,6 +22,14 @@ public class GameSettings {
         return 200;
     }
 
+    public int getCloudRate() {
+        return 350;
+    }
+
+    public int getCloudSpeed() {
+        return 3;
+    }
+
     public String[] getInstructions() {
         return new String[]{
                 "Press SPACE to start!",

@@ -8,6 +8,7 @@ public class Model {
     private final GameSettings settings;
     private final Player player = new Player();
     private final ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+    private final ArrayList<Cloud> clouds = new ArrayList<Cloud>();
     private int newPipeDist;
     private int destroyPipeDist;
     private int score = 0;
@@ -68,6 +69,35 @@ public class Model {
 
         for (Pipe pipe : this.pipes) {
             pipe.slideLeft();
+        }
+    }
+
+    public int[][] getCloudData() {
+        int[][] cloudData = new int[clouds.size()][2];
+
+        for (int i = 0; i < clouds.size(); i++) {
+            cloudData[i] = clouds.get(i).getCloudData();
+        }
+
+        return cloudData;
+    }
+
+    public void createCloud() {
+        this.clouds.add(new Cloud(50, this.settings.getCloudSpeed(), this.settings.getScreenSize()));
+    }
+
+    private void destroyCloud() {
+        this.clouds.remove(0);
+    }
+
+    public void slideClouds() {
+        for (Cloud cloud : this.clouds) {
+            cloud.slideLeft();
+        }
+
+        if (!this.clouds.isEmpty() && this.clouds.get(0).getCloudData()[0] < -150) {
+            this.createCloud();
+            this.destroyCloud();
         }
     }
 
